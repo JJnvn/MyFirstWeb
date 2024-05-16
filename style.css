@@ -1,0 +1,59 @@
+@font-face {
+    /* arbitarily named (orininal name is kanit)*/
+    font-family: "kanitja";
+    /* relative path is refer by the current path (not full path)*/
+    src: url(./kanit/Kanit-Regular.ttf);
+}
+body {
+    font-family: "kanitja";
+    background-color: rgb(255, 215, 166);
+}
+.container{
+    width: 100%;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: blanchedalmond;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.header{
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.header-name{
+    width: 140px;
+}
+.flex{
+    display: flex;
+}
+.form-input{
+    margin-bottom: 10px;
+}
+input.box,textarea{
+    border: 1px gainsboro solid;
+    width: 100%;
+}
+.center{
+    text-align: center;
+}
+.button{
+    border: 0px;
+    width: 50%;
+    height: 40px;
+    background-color: #b2a59b;
+    color: white;
+}
+
+@media screen and (max-width: 768px){
+    .flex{
+        flex-direction: column;
+    }
+    .header{
+        font-size: 24px;
+    }
+    .button{
+        width: 100%;
+    }
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .red{
+            background-color: red;
+        }
+        .green{
+            background-color: green;
+        }
+        .blue{
+            background-color: blue;
+        }
+        .container .item:first-child{
+            background-color: yellow;
+        }
+        .item{
+            background-color: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <!-- all blue from 'last declaration wins' -->
+    <div class="red green blue">color test 1</div>
+    <div class="red blue green">color test 2</div>
+    <div class="blue green red">color test 3</div>
+    <div class="container">
+        <div class="item">item 1</div>
+        <div class="item">item 2</div>
+        <div class="item">item 3</div>
+        <div class="item">item 4</div>
+    </div>
+</body>
+</html>
