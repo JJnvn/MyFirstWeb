@@ -12,10 +12,24 @@ const port = 8000
 
 // path = '/'
 app.get('/users', (req, res) => {
-  res.send(users)
+  const filteredUsers = users.map(user => {
+    return {
+      id : user.id,
+      firstName : user.firstName,
+      lastName : user.lastName,
+      fullName : user.firstName + ' ' + user.lastName
+    }
+  })
+  res.send(filteredUsers)
 })
 
-app.post('/user', (req, res) => {
+app.get('/users/:id', (req, res) => {
+  let id = req.params.id
+  let selectedIndex = users.findIndex(user => user.id == id)
+  res.send(users[selectedIndex])
+})
+
+app.post('/users', (req, res) => {
   let user = req.body
   user.id = counter
   counter += 1
@@ -26,14 +40,16 @@ app.post('/user', (req, res) => {
   })
 })
 
-app.put('/user/:id', (req, res) => {
+app.put('/users/:id', (req, res) => {
   let id = req.params.id
   let updateUser = req.body
 
   let selectedIndex = users.findIndex(user => user.id == id)
   // users[selectedIndex] = updateUser // this will delete the id key
   users[selectedIndex].firstName = updateUser.firstName || users[selectedIndex].firstName
-  users[selectedIndex].lastName = updateUser.lastName || users[selectedIndex].lastNametName
+  users[selectedIndex].lastName = updateUser.lastName || users[selectedIndex].lastName
+  users[selectedIndex].age = updateUser.age || users[selectedIndex].age
+  users[selectedIndex].gender = updateUser.gender || users[selectedIndex].gender
   // res.send(selectedIndex + '')
   res.json({
     message: 'update user complete',
@@ -44,7 +60,7 @@ app.put('/user/:id', (req, res) => {
   })
 })
 
-app.patch('/user/:id', (req, res) => {
+app.patch('/users/:id', (req, res) => {
   let id = req.params.id
   let updateUser = req.body
 
@@ -52,8 +68,14 @@ app.patch('/user/:id', (req, res) => {
   if(updateUser.firstName){
     users[selectedIndex].firstName = updateUser.firstName
   }
-  if(updateUser.lastNamestName){
-    users[selectedIndex].lastName = updateUser.lastNamestName
+  if(updateUser.lastName){
+    users[selectedIndex].lastName = updateUser.lastName
+  }
+  if(updateUser.age){
+    users[selectedIndex].age = updateUser.age
+  }
+  if(updateUser.gender){
+    users[selectedIndex].gender = updateUser.gender
   }
 
   res.json({
@@ -65,7 +87,7 @@ app.patch('/user/:id', (req, res) => {
   })
 })
 
-app.delete('/user/:id', (req, res) => {
+app.delete('/users/:id', (req, res) => {
   let id = req.params.id
 
   let selectedIndex = users.findIndex(user => user.id == id)
