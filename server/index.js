@@ -96,7 +96,7 @@ app.post("/users", async (req, res) => {
     const userId = result[0].insertId;
     res.status(201).json({ message: "User created successfully", userId });
   } catch (error) {
-    console.log("backend", error);
+    // console.log("backend", error);
     const errorMessage = error.message || "something went wrong";
     const errors = error.errors || [];
     console.error("Error creating user:", errorMessage);

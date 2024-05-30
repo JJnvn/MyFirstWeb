@@ -1,3 +1,53 @@
+const BASE_URL = "http://localhost:8000";
+
+let mode = "CREATE"; // default
+let selectedId = "";
+
+window.onload = async () => {
+  const urlParams = new URLSearchParams(window.location.search); // learn more
+  const id = urlParams.get("id");
+  console.log(id);
+  if (id) {
+    mode = "EDIT";
+    selectedId = id;
+
+    try {
+      // get old data
+      const response = await axios.get(`${BASE_URL}/users/${id}`); // template literal
+      const user = response.data[0];
+      console.log("data", response.data);
+
+      // insert the old one
+      let firstnameDOM = document.querySelector("input[name=firstname]");
+      let lastnameDOM = document.querySelector("input[name=lastname]");
+      let ageDOM = document.querySelector("input[name=age]");
+      let descriptionDOM = document.querySelector("textarea[name=description]");
+
+      firstnameDOM.value = user.firstName;
+      lastnameDOM.value = user.lastName;
+      ageDOM.value = user.age;
+      descriptionDOM.value = user.description;
+
+      let genderDOM = document.querySelectorAll("input[name=gender]") || {};
+      let interestDOMs = document.querySelectorAll("input[name=interest]");
+
+      for (let i = 0; i < genderDOM.length; i++) {
+        if (genderDOM[i].value == user.gender) {
+          genderDOM[i].checked = true;
+        }
+      }
+
+      for (let i = 0; i < interestDOMs.length; i++) {
+        if (user.interest.includes(interestDOMs[i].value)) {
+          interestDOMs[i].checked = true;
+        }
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+};
+
 const validateData = (userData) => {
   let errors = [];
 
@@ -62,17 +112,23 @@ const submitData = async () => {
         errors: errors,
       };
     }
-
-    const response = await axios.post("http://localhost:8000/users/", userData);
-    console.log("response", response.data);
-    messageDOM.innerHTML = "data saved";
+    let message = "data saved";
+    if (mode == "CREATE") {
+      const response = await axios.post(`${BASE_URL}/users/`, userData);
+    } else {
+      message = "data edited";
+      const response = await axios.put(
+        `${BASE_URL}/users/${selectedId}`,
+        userData
+      );
+    }
+    // console.log("response", response.data);
+    messageDOM.innerHTML = message;
     messageDOM.className = "message success";
   } catch (error) {
     // const tmp = JSON.stringify(error);
     // console.log("error check 0 ", tmp);
-    console.log("error check 1 ", error);
     console.error("error message", error.error || error.message);
-    // console.error("error", error);
     if (error.response) {
       console.log("first");
       // console.log(error.response.data.message);
