@@ -24,6 +24,31 @@ const initMySQL = async () => {
   });
 };
 
+const validateData = (userData) => {
+  let errors = [];
+
+  if (!userData.firstname) {
+    errors.push("add your name");
+  }
+  if (!userData.lastname) {
+    errors.push("add your lastname");
+  }
+  if (!userData.age) {
+    errors.push("add your age");
+  }
+  if (!userData.gender) {
+    errors.push("select your gender");
+  }
+  if (!userData.interest) {
+    errors.push("select your interests");
+  }
+  if (!userData.description) {
+    errors.push("add your description");
+  }
+
+  return errors;
+};
+
 app.get("/testdb-new", async (req, res) => {
   try {
     let results = await conn.query("SELECT * FROM users");
@@ -56,15 +81,26 @@ app.get("/users/:id", async (req, res) => {
 });
 
 app.post("/users", async (req, res) => {
-  const data = req.body;
-
   try {
+    let data = req.body;
+
+    const errors = validateData(data);
+    if (errors.length > 0) {
+      throw {
+        message: "data incomplete from backend",
+        errors: errors,
+      };
+    }
+
     const result = await conn.query("INSERT INTO users SET ?", data);
     const userId = result[0].insertId;
     res.status(201).json({ message: "User created successfully", userId });
   } catch (error) {
-    console.error("Error creating user:", error.message);
-    res.status(500).json({ error: "Error creating user" });
+    console.log("backend", error);
+    const errorMessage = error.message || "something went wrong";
+    const errors = error.errors || [];
+    console.error("Error creating user:", errorMessage);
+    res.status(500).json({ error: errorMessage, errors: errors });
   }
 });
 

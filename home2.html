@@ -1,60 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <div class="container form-input">
-            <div class="header">register form</div>
-            <div class="flex form-input">
-                <div class="header-name">firstname</div>
-                <input type="text" class="form" name="firstname"/>
-            </div>
-            <div class="flex form-input">
-                <div class="header-name">surename</div>
-                <input type="text" class="form" name="lastname"/>
-            </div>
-            <div class="flex form-input">
-                <div class="header-name">age</div>
-                <input type="text" class="form" name="age"/>
-            </div>
-            <div class="form-input">
-                <span class="header-name">gender</span>
-                <div class="choice flex">
-                    <div>
-                        <input name="gender" type="radio" value="male"/> male
-                    </div>
-                    <div>
-                        <input name="gender" type="radio" value="female"/> female
-                    </div>
-                    <div>
-                        <input name="gender" type="radio" value="undefined"/> undefined
-                    </div>
-                </div>
-            </div>
-            <div class="form-input">
-                <span class="header-name">interest</span>
-                <div><input name="interest" type="checkbox" value="html"/> html</div>
-                <div><input name="interest" type="checkbox" value="css"/> css</div>
-                <div><input name="interest" type="checkbox" value="js"/> js</div>
-            </div>
-            <div class="form-input">
-                detail
-                <div>
-                    <textarea name="description" id="" cols="30" rows="10"></textarea>
-                </div>
-            </div>
-            <div class="form-input center">
-                <a href="https://www.youtube.com/watch?v=KCYxFXIAn_4&t=4572s" class="form-input">tutorial link</a>
-            </div>
-            <div class="center">
-                <button class="button" onclick="submitData()">submit ja</button>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container form-input">
+      <div class="header">register form</div>
+      <div class="flex form-input">
+        <div class="header-name">firstname</div>
+        <input type="text" class="form" name="firstname" />
+      </div>
+      <div class="flex form-input">
+        <div class="header-name">surename</div>
+        <input type="text" class="form" name="lastname" />
+      </div>
+      <div class="flex form-input">
+        <div class="header-name">age</div>
+        <input type="text" class="form" name="age" />
+      </div>
+      <div class="form-input">
+        <span class="header-name">gender</span>
+        <div class="choice flex">
+          <div><input name="gender" type="radio" value="male" /> male</div>
+          <div><input name="gender" type="radio" value="female" /> female</div>
+          <div>
+            <input name="gender" type="radio" value="undefined" /> undefined
+          </div>
         </div>
-
-        <script src="index.js"></script>
-    </body>
+      </div>
+      <div class="form-input">
+        <span class="header-name">interest</span>
+        <div><input name="interest" type="checkbox" value="html" /> html</div>
+        <div><input name="interest" type="checkbox" value="css" /> css</div>
+        <div><input name="interest" type="checkbox" value="js" /> js</div>
+      </div>
+      <div class="form-input">
+        detail
+        <div>
+          <textarea name="description" id="" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="form-input center">
+        <a
+          href="https://www.youtube.com/watch?v=KCYxFXIAn_4&t=4572s"
+          class="form-input"
+          >tutorial link</a
+        >
+      </div>
+      <div id="message" class="message"></div>
+      <div class="center">
+        <button class="button" onclick="submitData()">submit ja</button>
+      </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="index.js"></script>
+  </body>
 </html>

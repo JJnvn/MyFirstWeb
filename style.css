@@ -45,6 +45,27 @@ input.box,textarea{
     background-color: #b2a59b;
     color: white;
 }
+.button:hover{
+    background-color: #cabcb1;
+    cursor: pointer;
+}
+.button:active{
+    background-color: #968c84;
+}
+.message{
+    background-color: lightgray;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: none;
+}
+.message.success {
+    background-color: lightgreen;
+    display: block;
+}
+.message.danger {
+    background-color: lightcoral;
+    display: block;
+}
 
 @media screen and (max-width: 768px){
     .flex{
